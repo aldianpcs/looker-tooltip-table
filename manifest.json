@@ -1,0 +1,11 @@
+{
+    "name": "Table with Tooltip",
+    "description": "Custom table with hover tooltip from note field",
+    "author": "Your Name",
+    "organization": "Your Org",
+    "version": "1.0",
+    "components": ["dscc"],
+    "style": "light",
+    "scripts": ["index.html"]
+  }
+  
