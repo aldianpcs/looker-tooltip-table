@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: Arial, sans-serif;
+      }
+      th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        position: relative;
+      }
+      td:hover::after {
+        content: attr(data-tooltip);
+        white-space: pre-line;
+        position: absolute;
+        left: 0;
+        top: 100%;
+        background: #333;
+        color: #fff;
+        padding: 6px;
+        border-radius: 4px;
+        z-index: 10;
+        min-width: 200px;
+        max-width: 400px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="table-container"></div>
+
+    <script>
+      const dscc = window.dscc;
+
+      const drawViz = (data) => {
+        const rows = data.tables.DEFAULT;
+        const tableContainer = document.getElementById("table-container");
+        let html = "<table><thead><tr><th>Nama</th></tr></thead><tbody>";
+
+        rows.forEach(row => {
+          const nama = row[0].formatted || "";
+          const note = row[1]?.formatted || "";
+          html += `<tr><td data-tooltip="${note}">${nama}</td></tr>`;
+        });
+
+        html += "</tbody></table>";
+        tableContainer.innerHTML = html;
+      };
+
+      dscc.subscribeToData(drawViz, {transform: dscc.tableTransform});
+    </script>
+  </body>
+</html>
